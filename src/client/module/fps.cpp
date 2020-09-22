@@ -110,6 +110,7 @@ namespace
 				
 				game::native::R_AddCmdDrawText(origin_string, 0x7FFFFFFF, font, origin_x, y + 50, scale, scale, 0.0f, origin_color, 6);
 			}
+
 			if (game::native::mp::g_entities && game::native::Dvar_FindVar("cg_drawFPS")->current.integer > 2 && game::native::SV_Loaded()) {
 				
 				auto* const vel_string = utils::string::va("%f", sqrt(pow(game::native::mp::g_entities[0].client->ps.velocity[0], 2) + pow(game::native::mp::g_entities[0].client->ps.velocity[1], 2) + pow(game::native::mp::g_entities[0].client->ps.velocity[2], 2)));

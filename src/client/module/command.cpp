@@ -157,6 +157,28 @@ void command::add_mp_commands()
         game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"ufo %s\"", game::native::mp::g_entities[clientNum].client->flags & 2 ? "^2on" : "^1off"));
     });
 
+    command::add_sv("god", [&](int clientNum, command::params_sv&)
+    {
+        if (!game::native::SV_Loaded())
+        {
+            return;
+        }
+
+        game::native::mp::g_entities[clientNum].flags ^= 1;
+        game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"godmode %s\"", game::native::mp::g_entities[clientNum].flags & 1 ? "^2on" : "^1off"));
+    });
+
+    command::add_sv("demigod", [&](int clientNum, command::params_sv&)
+    {
+        if (!game::native::SV_Loaded())
+        {
+            return;
+        }
+
+        game::native::mp::g_entities[clientNum].flags ^= 2;
+        game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"demigod %s\"", game::native::mp::g_entities[clientNum].flags & 2 ? "^2on" : "^1off"));
+    });
+
     command::add_sv("setviewpos", [&](int clientNum, command::params_sv&  params)
     {
         if (!game::native::SV_Loaded())
@@ -167,12 +189,6 @@ void command::add_mp_commands()
         game::native::mp::g_entities[clientNum].client->ps.origin[0] = std::strtof(params.get(1), NULL);
         game::native::mp::g_entities[clientNum].client->ps.origin[1] = std::strtof(params.get(2), NULL);
         game::native::mp::g_entities[clientNum].client->ps.origin[2] = std::strtof(params.get(3), NULL);
-    });
-
-    command::add_sv("god", [&](int clientNum, command::params_sv&) {
-        game::native::mp::g_entities[clientNum].maxHealth = game::native::mp::g_entities[clientNum].maxHealth == INT32_MAX ? 100 : INT32_MAX;
-        game::native::mp::g_entities[clientNum].health = game::native::mp::g_entities[clientNum].maxHealth;
-        game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"godmode %s\"", game::native::mp::g_entities[clientNum].maxHealth == INT32_MAX ? "^2on" : "^1off"));
     });
 
     command::add_sv("setviewang", [&](int clientNum, command::params_sv& params)
