@@ -157,6 +157,28 @@ void command::add_mp_commands()
         game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"ufo %s\"", game::native::mp::g_entities[clientNum].client->flags & 2 ? "^2on" : "^1off"));
     });
 
+    command::add_sv("god", [&](int clientNum, command::params_sv&)
+    {
+        if (!game::native::SV_Loaded())
+        {
+            return;
+        }
+
+        game::native::mp::g_entities[clientNum].flags ^= 1;
+        game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"godmode %s\"", game::native::mp::g_entities[clientNum].flags & 1 ? "^2on" : "^1off"));
+    });
+
+    command::add_sv("demigod", [&](int clientNum, command::params_sv&)
+    {
+        if (!game::native::SV_Loaded())
+        {
+            return;
+        }
+
+        game::native::mp::g_entities[clientNum].flags ^= 2;
+        game::native::SV_GameSendServerCommand(clientNum, 1, utils::string::va("f \"demigod %s\"", game::native::mp::g_entities[clientNum].flags & 2 ? "^2on" : "^1off"));
+    });
+
     command::add_sv("setviewpos", [&](int clientNum, command::params_sv&  params)
     {
         if (!game::native::SV_Loaded())

@@ -13,6 +13,7 @@ namespace
 {
 	float fps_color[4] = { 0.6f, 1.0f, 0.0f, 1.0f };
 	float origin_color[4] = { 1.0f, 0.67f, 0.13f, 1.0f };
+	float vel_color[4] = { 0.14f, 0.74f, 0.94f, 1.0f };
 
 	struct cg_perf_data
 	{
@@ -104,8 +105,19 @@ namespace
 			if (game::native::mp::g_entities && game::native::Dvar_FindVar("cg_drawFPS")->current.integer > 1 && game::native::SV_Loaded())
 			{
 				auto* const origin_string = utils::string::va("%f, %f, %f", game::native::mp::g_entities[0].client->ps.origin[0], game::native::mp::g_entities[0].client->ps.origin[1], game::native::mp::g_entities[0].client->ps.origin[2]);
+				
 				const auto origin_x = (game::native::ScrPlace_GetViewPlacement()->realViewportSize[0] - 10.0f) - game::native::R_TextWidth(origin_string, 0x7FFFFFFF, font) * scale;
+				
 				game::native::R_AddCmdDrawText(origin_string, 0x7FFFFFFF, font, origin_x, y + 50, scale, scale, 0.0f, origin_color, 6);
+			}
+
+			if (game::native::mp::g_entities && game::native::Dvar_FindVar("cg_drawFPS")->current.integer > 2 && game::native::SV_Loaded()) {
+				
+				auto* const vel_string = utils::string::va("%f", sqrt(pow(game::native::mp::g_entities[0].client->ps.velocity[0], 2) + pow(game::native::mp::g_entities[0].client->ps.velocity[1], 2) + pow(game::native::mp::g_entities[0].client->ps.velocity[2], 2)));
+				
+				const auto vel_x = (game::native::ScrPlace_GetViewPlacement()->realViewportSize[0] - 10.0f) - game::native::R_TextWidth(vel_string, 0x7FFFFFFF, font) * scale;
+				
+				game::native::R_AddCmdDrawText(vel_string, 0x7FFFFFFF, font, vel_x, y + 100, scale, scale, 0.0f, vel_color, 6);
 			}
 
 		}
