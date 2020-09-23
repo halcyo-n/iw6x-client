@@ -68,6 +68,7 @@ public:
 	{
 		memset(&handlers, 0, sizeof(handlers));
 		Discord_Initialize("757965986954477690", &handlers, 1, "");
+		discordPresence.startTimestamp = std::time(0);
 		scheduler::loop(tick, scheduler::pipeline::async);
 	}
 };
