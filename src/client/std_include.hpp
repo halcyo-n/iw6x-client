@@ -1,6 +1,8 @@
 #pragma once
 
-#define BINARY_PAYLOAD_SIZE 0x60000000
+// MP: 0x0B459A00
+// SP: 0x079C6A00
+#define BINARY_PAYLOAD_SIZE 0x0B500000
 
 #pragma warning(push)
 #pragma warning(disable: 4100)
@@ -44,6 +46,8 @@
 #include <Urlmon.h>
 #include <atlbase.h>
 #include <iphlpapi.h>
+#include <dbghelp.h>
+#include <tlhelp32.h>
 
 // min and max is required by gdi, therefore NOMINMAX won't work
 #ifdef max
@@ -67,6 +71,7 @@
 #include <filesystem>
 #include <functional>
 #include <sstream>
+#include <optional>
 
 #include <zlib.h>
 #include <gsl/gsl>
@@ -88,8 +93,9 @@
 
 #pragma comment(lib, "ntdll.lib")
 #pragma comment(lib, "ws2_32.lib")
-#pragma comment( lib, "Urlmon.lib" )
-#pragma comment(lib, "IPHLPAPI.lib")
+#pragma comment(lib, "urlmon.lib" )
+#pragma comment(lib, "iphlpapi.lib")
+#pragma comment(lib, "dbghelp.lib")
 
 #include "resource.hpp"
 

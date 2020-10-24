@@ -65,13 +65,13 @@ FARPROC load_binary(const launcher::mode mode)
 	std::string binary;
 	switch (mode)
 	{
+	case launcher::mode::server:
 	case launcher::mode::multiplayer:
 		binary = "iw6mp64_ship.exe";
 		break;
 	case launcher::mode::singleplayer:
 		binary = "iw6sp64_ship.exe";
 		break;
-	case launcher::mode::server:
 	case launcher::mode::none:
 	default:
 		throw std::runtime_error("Invalid game mode!");
@@ -80,7 +80,8 @@ FARPROC load_binary(const launcher::mode mode)
 	std::string data;
 	if (!utils::io::read_file(binary, &data))
 	{
-		throw std::runtime_error("Failed to read game binary!");
+		throw std::runtime_error(
+			"Failed to read game binary! Please copy the iw6x.exe into you Call of Duty: Ghosts installation folder and run it from there.");
 	}
 
 	return loader.load(self, data);
@@ -97,8 +98,6 @@ void remove_crash_file()
 
 int main()
 {
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
-
 	FARPROC entry_point;
 	SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
 
@@ -127,13 +126,21 @@ int main()
 				if (mode == launcher::mode::none) return 0;
 			}
 
+			game::environment::set_mode(mode);
+
 			entry_point = load_binary(mode);
 			if (!entry_point)
 			{
 				throw std::runtime_error("Unable to load binary into memory");
 			}
 
-			game::initialize(mode);
+			const auto value = *reinterpret_cast<DWORD*>(0x140001337);
+			if (value != 0xDB0A33E7 && value != 0xA6D147E7)
+			{
+				throw std::runtime_error("Unsupported Call of Duty: Ghosts version");
+			}
+
+			game::environment::initialize();
 			if (!module_loader::post_load()) return 0;
 
 			premature_shutdown = false;

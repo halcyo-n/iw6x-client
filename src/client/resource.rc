@@ -45,8 +45,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,0
- PRODUCTVERSION 1,0,0,0
+ FILEVERSION VERSION_RC
+ PRODUCTVERSION VERSION_RC
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -61,14 +61,16 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", "IW4x Team"
+            VALUE "CompanyName", "X Labs"
             VALUE "FileDescription", "IW6x"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", SHORTVERSION
             VALUE "InternalName", "IW6x"
-            VALUE "LegalCopyright", "All rights reserved."
+            VALUE "LegalCopyright", "Copyright (C) 2020 X Labs Project. All rights reserved."
+            VALUE "Licence", "GPLv3"
+            VALUE "Info", "https://github.com/XLabsProject/iw6x-client"
             VALUE "OriginalFilename", "iw6x.exe"
             VALUE "ProductName", "iw6x"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", SHORTVERSION
         END
     END
     BLOCK "VarFileInfo"
