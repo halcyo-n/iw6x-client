@@ -16,7 +16,7 @@ namespace stats
 				return;
 			}
 
-			//NOP's "UI_VerifyString" (inlined) to allow partially colored class names
+			//NOP's UI_VerifyString (inlined) to allow partially colored class names
 			utils::hook::nop(0x1404D77ED, 2);
 
 			command::add("unlockall", []()
