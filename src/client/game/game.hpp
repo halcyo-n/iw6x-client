@@ -27,6 +27,9 @@ namespace game
 	typedef CodPlayMode (*Com_GetCurrentCoDPlayMode_t)();
 	extern Com_GetCurrentCoDPlayMode_t Com_GetCurrentCoDPlayMode;
 
+	typedef void (*Com_SetSlowMotion_t)(const float, const float, const int);
+	extern Com_SetSlowMotion_t Com_SetSlowMotion;
+
 	typedef void (*Conbuf_AppendText_t)(const char* message);
 	extern Conbuf_AppendText_t Conbuf_AppendText;
 
@@ -54,6 +57,9 @@ namespace game
 
 	typedef void (*Dvar_GetCombinedString_t)(char* buffer, int index);
 	extern Dvar_GetCombinedString_t Dvar_GetCombinedString;
+
+	typedef const char* (*Dvar_GetVariantStringWithDefault_t)(const char* dvarName, const char* defaultValue);
+	extern Dvar_GetVariantStringWithDefault_t Dvar_GetVariantStringWithDefault;
 
 	typedef dvar_t* (*Dvar_RegisterBool_t)(const char* dvarName, bool value, unsigned int flags,
 	                                       const char* description);
@@ -113,11 +119,17 @@ namespace game
 	typedef char* (*I_CleanStr_t)(char* string);
 	extern I_CleanStr_t I_CleanStr;
 
+	typedef const char* (*Key_KeynumToString_t)(int, int, int);
+	extern Key_KeynumToString_t Key_KeynumToString;
+
 	typedef unsigned int (*Live_SyncOnlineDataFlags_t)(int);
 	extern Live_SyncOnlineDataFlags_t Live_SyncOnlineDataFlags;
 
 	typedef void (*LUI_OpenMenu_t)(int clientNum, const char* menu, int a3, int a4, unsigned int a5);
 	extern LUI_OpenMenu_t LUI_OpenMenu;
+
+	typedef bool (*Menu_IsMenuOpenAndVisible_t)(int clientNum, const char* menu);
+	extern Menu_IsMenuOpenAndVisible_t Menu_IsMenuOpenAndVisible;
 
 	typedef Material* (*Material_RegisterHandle_t)(const char* material);
 	extern Material_RegisterHandle_t Material_RegisterHandle;
@@ -145,6 +157,12 @@ namespace game
 	typedef ScreenPlacement* (*ScrPlace_GetViewPlacement_t)();
 	extern ScrPlace_GetViewPlacement_t ScrPlace_GetViewPlacement;
 
+	typedef float(*Scr_GetFloat_t)(int index);
+	extern Scr_GetFloat_t Scr_GetFloat;
+
+	typedef int(*Scr_GetNumParam_t)();
+	extern Scr_GetNumParam_t Scr_GetNumParam;
+
 	typedef const char* (*SEH_StringEd_GetString_t)(const char*);
 	extern SEH_StringEd_GetString_t SEH_StringEd_GetString;
 
@@ -171,6 +189,12 @@ namespace game
 
 	typedef const char* (*SV_GetGuid_t)(int clientNum);
 	extern SV_GetGuid_t SV_GetGuid;
+
+	typedef void (*SV_KickClientNum_t)(int clientNum, const char* reason);
+	extern SV_KickClientNum_t SV_KickClientNum;
+
+	typedef void (*SV_SetConfigstring_t)(int index, const char* string);
+	extern SV_SetConfigstring_t SV_SetConfigstring;
 
 	typedef void (*SV_SpawnTestClient_t)(mp::gentity_s*);
 	extern SV_SpawnTestClient_t SV_SpawnTestClient;
@@ -210,6 +234,8 @@ namespace game
 
 	extern SOCKET* query_socket;
 
+	extern const char** command_whitelist;
+
 	namespace sp
 	{
 		extern gentity_s* g_entities;
@@ -225,6 +251,9 @@ namespace game
 		extern client_t* svs_clients;
 
 		extern std::uint32_t* sv_serverId_value;
+
+		extern int* gameTime;
+		extern int* serverTime;
 	}
 
 	int Cmd_Argc();
