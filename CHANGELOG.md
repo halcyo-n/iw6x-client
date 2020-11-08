@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+-   SP crashes on mouse scroll [#186](https://github.com/XLabsProject/iw6x-client/issues/186)
+
+### Pull Requests
+
+-   Change steam_id generation to a more suitable random [#178](https://github.com/XLabsProject/iw6x-client/pull/178) ([@skiff](https://github.com/skiff))
+
+## [v1.0.1] - 2020-11-05
+
+### Pull Requests
+
+-   Fix chat font on resolutions higher than 1080p [#176](https://github.com/XLabsProject/iw6x-client/pull/176) ([@skiff](https://github.com/skiff))
+-   Show infomation on title of the dedicated console [#166](https://github.com/XLabsProject/iw6x-client/pull/166) ([@GEEKiDoS](https://github.com/GEEKiDoS))
+
+## [v1.0.0] - 2020-11-03
+
+### Fixed
+
 -   2nd octet of the IP-address in status response is wrong. [#150](https://github.com/XLabsProject/iw6x-client/issues/150)
 -   Arxan exceptions cause performance issues [#144](https://github.com/XLabsProject/iw6x-client/issues/144)
 
@@ -100,6 +117,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Add setviewpos, setviewang commands, add viewpos to drawfps [#38](https://github.com/XLabsProject/iw6x-client/pull/38) ([@fedddddd](https://github.com/fedddddd))
 -   Make stats look better [#36](https://github.com/XLabsProject/iw6x-client/pull/36) ([@FragsAreUs](https://github.com/FragsAreUs))
 
-[Unreleased]: https://github.com/XLabsProject/iw6x-client/compare/v1.0.0-rc.1...HEAD
+[Unreleased]: https://github.com/XLabsProject/iw6x-client/compare/v1.0.1...HEAD
+
+[v1.0.1]: https://github.com/XLabsProject/iw6x-client/compare/v1.0.0...v1.0.1
+
+[v1.0.0]: https://github.com/XLabsProject/iw6x-client/compare/v1.0.0-rc.1...v1.0.0
 
 [v1.0.0-rc.1]: https://github.com/XLabsProject/iw6x-client/compare/22c834e0655795870621ce505ea189ae522e8223...v1.0.0-rc.1
